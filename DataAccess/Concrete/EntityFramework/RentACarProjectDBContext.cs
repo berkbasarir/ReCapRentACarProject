@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Concrete.EntityFramework
 {
-    class RentACarProjectDBContext : DbContext
+    public class RentACarProjectDbContext : DbContext
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -14,9 +14,10 @@ namespace DataAccess.Concrete.EntityFramework
                 @"Server = (localdb)\MSSQLLocalDB; Database = RentACarProjectDB; Trusted_Connection = true");
         }
 
+        public DbSet<Brand> Brands { get; set; }
         public DbSet<Car> Cars { get; set; }
         public DbSet<Color> Colors { get; set; }
-        public DbSet<Brand> Brands { get; set; }
+        public DbSet<User> Users { get; set; }
         public DbSet<Customer> Customers { get; set; }
     }
 }

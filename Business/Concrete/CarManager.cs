@@ -5,6 +5,7 @@ using Business.Abstract;
 using Business.Constant;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 
 namespace Business.Concrete
 {
@@ -41,6 +42,11 @@ namespace Business.Concrete
             return _carDal.GetAll();
         }
 
+        public Car GetById(int carId)
+        {
+            return _carDal.Get(c => c.Id == carId);
+        }
+
         public List<Car> GetAllByModelYear(int min, int max)
         {
             return _carDal.GetAll(c => c.ModelYear >= min && c.ModelYear <= max);
@@ -65,6 +71,11 @@ namespace Business.Concrete
         {
             _carDal.Update(car);
             Console.WriteLine(Messages.CarUpdated);
+        }
+
+        public List<CarDetailDto> GetCarDetails()
+        {
+            return _carDal.GetCarDetails();
         }
     }
 }

@@ -11,58 +11,54 @@ namespace ConsoleApp
         static void Main(string[] args)
         {
             CarManager carManager = new CarManager(new EfCarDal());
+            ColorManager colorManager = new ColorManager(new EfColorDal());
+            BrandManager brandManager = new BrandManager(new EfBrandDal());
 
-            //GetAllCarDescription(carManager);
-            //GetAllByModelYear(carManager);
-            //GetAllByDailyPrice(carManager);
-            //GetCarsByBrandId(carManager);
-            //GetCarsByColorId(carManager);
-            //carManager.Add(new Car {Id = 9, BrandId = 5, ColorId = 3, DailyPrice = 250, Description = "Gri Mercedes", ModelYear = 2021});
-            //carManager.Update(new Car {Id = 10, BrandId = 5, ColorId = 3, DailyPrice = 120, Description = "Gri Mercedes 2018", ModelYear = 2018});
-            //carManager.Add(new Car {Id = 11, BrandId = 5, ColorId = 3, Name = "Araba 11", DailyPrice = 300, Description = "Gold Mercedes", ModelYear = 2022});
-            GetCarsByBrandId(carManager);
+            //GetAllCarName(carManager);
+            //GetAllColorName(colorManager);
+            //GetColorNameById(colorManager);
+            //GetAllBrandName(brandManager);
+
+            GetCarDetails(carManager);
+
+
+
         }
 
-
-
-        private static void GetAllCarDescription(CarManager carManager)
+        private static void GetAllBrandName(BrandManager brandManager)
         {
-            Console.WriteLine("-----------All----------");
+            foreach (var brand in brandManager.GetAll())
+            {
+                Console.WriteLine(brand.Name);
+            }
+        }
+
+        private static void GetColorNameById(ColorManager colorManager)
+        {
+            var color = colorManager.GetById(2);
+            Console.WriteLine(color.Name);
+        }
+
+        private static void GetAllColorName(ColorManager colorManager)
+        {
+            foreach (var color in colorManager.GetAll())
+            {
+                Console.WriteLine(color.Name);
+            }
+        }
+
+        private static void GetAllCarName(CarManager carManager)
+        {
             foreach (var car in carManager.GetAll())
             {
-                Console.WriteLine(car.Description);
+                Console.WriteLine(car.Name);
             }
         }
-        private static void GetAllByModelYear(CarManager carManager)
+        private static void GetCarDetails(CarManager carManager)
         {
-            Console.WriteLine("-----------2018-2022----------");
-            foreach (var car in carManager.GetAllByModelYear(2018, 2022))
+            foreach (var car in carManager.GetCarDetails())
             {
-                Console.WriteLine(car.Description);
-            }
-        }
-        private static void GetAllByDailyPrice(CarManager carManager)
-        {
-            Console.WriteLine("-----------50-150----------");
-            foreach (var car in carManager.GetByDailyPrice(50, 150))
-            {
-                Console.WriteLine(car.Description);
-            }
-        }
-        private static void GetCarsByBrandId(CarManager carManager)
-        {
-            Console.WriteLine("-----------Mercedes----------");
-            foreach (var car in carManager.GetCarsByBrandId(5))
-            {
-                Console.WriteLine(car.Description);
-            }
-        }
-        private static void GetCarsByColorId(CarManager carManager)
-        {
-            Console.WriteLine("-----------Beyaz----------");
-            foreach (var car in carManager.GetCarsByColorId(2))
-            {
-                Console.WriteLine(car.Description);
+                Console.WriteLine("{0} - {1} - {2} - {3}", car.CarName, car.BrandName, car.ColorName, car.DailyPrice);
             }
         }
     }
