@@ -18,7 +18,6 @@ namespace ConsoleApp
             //GetAllColorName(colorManager);
             //GetColorNameById(colorManager);
             //GetAllBrandName(brandManager);
-
             GetCarDetails(carManager);
 
 
@@ -27,7 +26,7 @@ namespace ConsoleApp
 
         private static void GetAllBrandName(BrandManager brandManager)
         {
-            foreach (var brand in brandManager.GetAll())
+            foreach (var brand in brandManager.GetAll().Data)
             {
                 Console.WriteLine(brand.Name);
             }
@@ -35,31 +34,44 @@ namespace ConsoleApp
 
         private static void GetColorNameById(ColorManager colorManager)
         {
-            var color = colorManager.GetById(2);
+            var color = colorManager.GetById(2).Data;
             Console.WriteLine(color.Name);
         }
 
         private static void GetAllColorName(ColorManager colorManager)
         {
-            foreach (var color in colorManager.GetAll())
+            foreach (var color in colorManager.GetAll().Data)
             {
                 Console.WriteLine(color.Name);
             }
         }
 
+        
         private static void GetAllCarName(CarManager carManager)
         {
-            foreach (var car in carManager.GetAll())
+            foreach (var car in carManager.GetAll().Data)
             {
                 Console.WriteLine(car.Name);
             }
         }
         private static void GetCarDetails(CarManager carManager)
         {
-            foreach (var car in carManager.GetCarDetails())
+            var result = carManager.GetCarDetails();
+
+            if (result.Success)
             {
-                Console.WriteLine("{0} - {1} - {2} - {3}", car.CarName, car.BrandName, car.ColorName, car.DailyPrice);
+                foreach (var car in result.Data)
+                {
+                    Console.WriteLine("{0} - {1} - {2} - {3}", car.CarName, car.BrandName, car.ColorName, car.DailyPrice);
+                }
             }
+            else
+            {
+                Console.WriteLine(result.Message);
+            }
+
+            
         }
+        
     }
 }
