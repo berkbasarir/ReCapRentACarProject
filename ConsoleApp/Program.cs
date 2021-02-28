@@ -10,15 +10,24 @@ namespace ConsoleApp
     {
         static void Main(string[] args)
         {
+            /*
             CarManager carManager = new CarManager(new EfCarDal());
             ColorManager colorManager = new ColorManager(new EfColorDal());
             BrandManager brandManager = new BrandManager(new EfBrandDal());
+            UserManager userManager = new UserManager(new EfUserDal());
+            */
+            CustomerManager customerManager = new CustomerManager(new EfCustomerDal());
 
             //GetAllCarNameTest(carManager);
             //GetAllColorNameTest(colorManager);
             //GetColorNameByIdTest(colorManager);
             //GetAllBrandNameTest(brandManager);
             //GetCarDetailsTest(carManager);
+
+            //userManager.Add(new User { Id = 1, FirstName = "Berk", LastName = "Başarır", Email = "berk@berk.com", Password = 123456});
+            customerManager.Add(new Customer {Id = 1, CompanyName = "Diyetlif"});
+
+
 
 
 

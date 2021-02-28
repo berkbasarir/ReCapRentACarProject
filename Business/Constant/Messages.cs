@@ -33,6 +33,7 @@ namespace Business.Constant
         public static string RentalUpdated = "Kiralama Güncellendi.";
         public static string RentalsListed = "Kiralamalar Listelendi.";
         public static string RentalListed = "Kiralama Listelendi.";
+        public static string RentalCarError = "Araç Kiralanamaz.";
 
         public static string UserAdded = "Kullanıcı Eklendi.";
         public static string UserDeleted = "Kullanıcı Silindi.";
@@ -45,7 +46,5 @@ namespace Business.Constant
         public static string CustomerUpdated = "Müşteri Güncellendi.";
         public static string CustomersListed = "Müşteriler Listelendi.";
         public static string CustomerListed = "Müşteri Listelendi.";
-
-
     }
 }

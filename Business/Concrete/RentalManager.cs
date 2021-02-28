@@ -19,6 +19,10 @@ namespace Business.Concrete
 
         public IResult Add(Rental rental)
         {
+            if (rental.ReturnDate == null)
+            {
+                return new ErrorResult(Messages.RentalCarError);
+            }
             _rentalDal.Add(rental);
             return new SuccessResult(Messages.RentalAdded);
         }
@@ -40,7 +44,7 @@ namespace Business.Concrete
 
         public IDataResult<Rental> GetById(int colorId)
         {
-            return new SuccessDataResult<Rental>(_rentalDal.Get(c => c.Id == colorId), Messages.RentalsListed);
+            return new SuccessDataResult<Rental>(_rentalDal.Get(c => c.Id == colorId), Messages.RentalListed);
         }
 
         public IResult Update(Rental rental)
