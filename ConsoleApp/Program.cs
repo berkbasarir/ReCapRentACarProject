@@ -14,17 +14,17 @@ namespace ConsoleApp
             ColorManager colorManager = new ColorManager(new EfColorDal());
             BrandManager brandManager = new BrandManager(new EfBrandDal());
 
-            //GetAllCarName(carManager);
-            //GetAllColorName(colorManager);
-            //GetColorNameById(colorManager);
-            //GetAllBrandName(brandManager);
-            GetCarDetails(carManager);
+            //GetAllCarNameTest(carManager);
+            //GetAllColorNameTest(colorManager);
+            //GetColorNameByIdTest(colorManager);
+            //GetAllBrandNameTest(brandManager);
+            //GetCarDetailsTest(carManager);
 
 
 
         }
 
-        private static void GetAllBrandName(BrandManager brandManager)
+        private static void GetAllBrandNameTest(BrandManager brandManager)
         {
             foreach (var brand in brandManager.GetAll().Data)
             {
@@ -32,13 +32,13 @@ namespace ConsoleApp
             }
         }
 
-        private static void GetColorNameById(ColorManager colorManager)
+        private static void GetColorNameByIdTest(ColorManager colorManager)
         {
             var color = colorManager.GetById(2).Data;
             Console.WriteLine(color.Name);
         }
 
-        private static void GetAllColorName(ColorManager colorManager)
+        private static void GetAllColorNameTest(ColorManager colorManager)
         {
             foreach (var color in colorManager.GetAll().Data)
             {
@@ -47,14 +47,14 @@ namespace ConsoleApp
         }
 
         
-        private static void GetAllCarName(CarManager carManager)
+        private static void GetAllCarNameTest(CarManager carManager)
         {
             foreach (var car in carManager.GetAll().Data)
             {
                 Console.WriteLine(car.Name);
             }
         }
-        private static void GetCarDetails(CarManager carManager)
+        private static void GetCarDetailsTest(CarManager carManager)
         {
             var result = carManager.GetCarDetails();
 
@@ -69,8 +69,6 @@ namespace ConsoleApp
             {
                 Console.WriteLine(result.Message);
             }
-
-            
         }
         
     }
