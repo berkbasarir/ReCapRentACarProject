@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Business.Abstract;
 using Business.Constant;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 
 namespace Business.Concrete
 {
@@ -42,6 +44,15 @@ namespace Business.Concrete
         {
             _customerDal.Update(customer);
             return new SuccessResult(Messages.CustomerUpdated);
+        }
+
+        public IDataResult<List<CustomerDetailDto>> GetCustomerDetails()
+        {
+            if (DateTime.Now.Hour >= 16 && DateTime.Now.Hour < 18)
+            {
+                return new ErrorDataResult<List<CustomerDetailDto>>(Messages.MaintenanceTime);
+            }
+            return new SuccessDataResult<List<CustomerDetailDto>>(_customerDal.GetCustomerDetails(), Messages.Listed);
         }
     }
 }

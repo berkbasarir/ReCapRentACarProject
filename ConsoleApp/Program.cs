@@ -15,22 +15,46 @@ namespace ConsoleApp
             ColorManager colorManager = new ColorManager(new EfColorDal());
             BrandManager brandManager = new BrandManager(new EfBrandDal());
             UserManager userManager = new UserManager(new EfUserDal());
-            */
             CustomerManager customerManager = new CustomerManager(new EfCustomerDal());
+            */
+
+            
 
             //GetAllCarNameTest(carManager);
             //GetAllColorNameTest(colorManager);
             //GetColorNameByIdTest(colorManager);
             //GetAllBrandNameTest(brandManager);
             //GetCarDetailsTest(carManager);
+            //UserManagerAddTest(userManager);
+            //CustomerManagerAddTest(customerManager);
+            //GetCustomerDetailsTest(customerManager);
+            //CustomerManagerUpdateTest(customerManager);
+            //UserDetailUpdateAndGet(userManager);
 
-            //userManager.Add(new User { Id = 1, FirstName = "Berk", LastName = "Başarır", Email = "berk@berk.com", Password = 123456});
+        }
+
+        private static void UserDetailUpdateAndGet(UserManager userManager)
+        {
+            userManager.Update(new User { Id = 1, FirstName = "Berk", LastName = "Başarır", Email = "berk@basarir", Password = 1 });
+            
+
+            var result = userManager.GetById(1).Data;
+            Console.WriteLine("Id: {0} FirstName: {1} LastName: {2} Email: {3} Password: {4}", result.Id, result.FirstName, result.LastName, result.Email, result.Password);
+        }
+
+        private static void CustomerManagerUpdateTest(CustomerManager customerManager)
+        {
+            customerManager.Update(new Customer {Id = 1, UserId = 1, CompanyName = "Berk.Co"});
+        }
+
+        private static void UserManagerAddTest(UserManager userManager)
+        {
+            userManager.Add(new User {Id = 4, FirstName = "Kemal", LastName = "Kağan", Email = "kemal@kagan.com", Password = 0});
+        }
+
+        private static void CustomerManagerAddTest(CustomerManager customerManager)
+        {
             customerManager.Add(new Customer {Id = 1, CompanyName = "Diyetlif"});
-
-
-
-
-
         }
 
         private static void GetAllBrandNameTest(BrandManager brandManager)
@@ -43,8 +67,9 @@ namespace ConsoleApp
 
         private static void GetColorNameByIdTest(ColorManager colorManager)
         {
-            var color = colorManager.GetById(2).Data;
-            Console.WriteLine(color.Name);
+            var color = colorManager.GetById(2);
+            Console.WriteLine(color.Data.Name);
+            Console.WriteLine(color.Message);
         }
 
         private static void GetAllColorNameTest(ColorManager colorManager)
@@ -53,8 +78,8 @@ namespace ConsoleApp
             {
                 Console.WriteLine(color.Name);
             }
+            Console.WriteLine(colorManager.GetAll().Message);
         }
-
         
         private static void GetAllCarNameTest(CarManager carManager)
         {
@@ -62,7 +87,9 @@ namespace ConsoleApp
             {
                 Console.WriteLine(car.Name);
             }
+            Console.WriteLine(carManager.GetAll().Message);
         }
+
         private static void GetCarDetailsTest(CarManager carManager)
         {
             var result = carManager.GetCarDetails();
@@ -73,12 +100,31 @@ namespace ConsoleApp
                 {
                     Console.WriteLine("{0} - {1} - {2} - {3}", car.CarName, car.BrandName, car.ColorName, car.DailyPrice);
                 }
+                Console.WriteLine(result.Message);
             }
             else
             {
                 Console.WriteLine(result.Message);
             }
         }
-        
+
+        private static void GetCustomerDetailsTest(CustomerManager customerManager)
+        {
+            var result = customerManager.GetCustomerDetails();
+
+            if (result.Success)
+            {
+                foreach (var customer in result.Data)
+                {
+                    Console.WriteLine("{0} - {1} - {2} - {3} - {4}", customer.FirstName, customer.LastName, customer.CompanyName, customer.Email, customer.Password);
+                }
+
+                Console.WriteLine(result.Message);
+            }
+            else
+            {
+                Console.WriteLine(result.Message);
+            }
+        }
     }
 }
