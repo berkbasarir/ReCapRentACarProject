@@ -38,7 +38,7 @@ namespace Business.Concrete
 
         public IDataResult<List<Car>> GetAll()
         {
-            if (DateTime.Now.Hour >= 16 && DateTime.Now.Hour < 18)
+            if (DateTime.Now.Hour >= 15 && DateTime.Now.Hour < 16)
             {
                 return new ErrorDataResult<List<Car>>(Messages.MaintenanceTime);
             }
@@ -77,13 +77,13 @@ namespace Business.Concrete
             return new SuccessResult(Messages.CarUpdated);
         }
 
-        public IDataResult<List<CarDetailDto>> GetCarDetails()
+        public IDataResult<List<CarDetailDto>> GetAllCarsDetails()
         {
             if (DateTime.Now.Hour >= 16 && DateTime.Now.Hour < 18)
             {
                 return new ErrorDataResult<List<CarDetailDto>>(Messages.MaintenanceTime);
             }
-            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails(), Messages.Listed);
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetAllCarsDetails(), Messages.Listed);
         }
     }
 }

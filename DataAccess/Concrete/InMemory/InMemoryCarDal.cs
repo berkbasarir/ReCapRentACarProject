@@ -55,7 +55,7 @@ namespace DataAccess.Concrete.InMemory
             return _cars.SingleOrDefault(c => c.Id == car.Id);
         }
 
-        public List<CarDetailDto> GetCarDetails()
+        public List<CarDetailDto> GetAllCarsDetails()
         {
             throw new NotImplementedException();
         }

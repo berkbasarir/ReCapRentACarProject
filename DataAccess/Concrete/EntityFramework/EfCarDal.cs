@@ -12,7 +12,7 @@ namespace DataAccess.Concrete.EntityFramework
 {
     public class EfCarDal : EfEntityRepositoryBase<Car, RentACarProjectDbContext>, ICarDal
     {
-        public List<CarDetailDto> GetCarDetails()
+        public List<CarDetailDto> GetAllCarsDetails()
         {
             using (RentACarProjectDbContext context = new RentACarProjectDbContext())
             {
@@ -22,7 +22,7 @@ namespace DataAccess.Concrete.EntityFramework
                     join co in context.Colors on c.ColorId equals co.Id
                     select new CarDetailDto
                     {
-                        CarId = c.Id, CarName = c.Name, BrandName = b.Name, ColorName = co.Name ,DailyPrice = c.DailyPrice
+                        CarId = c.Id, CarName = c.Name, BrandName = b.Name, ColorName = co.Name, ModelYear = c.ModelYear, DailyPrice = c.DailyPrice, Description = c.Description
                     };
                 return result.ToList();
             }

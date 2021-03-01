@@ -92,7 +92,7 @@ namespace ConsoleApp
 
         private static void GetCarDetailsTest(CarManager carManager)
         {
-            var result = carManager.GetCarDetails();
+            var result = carManager.GetAllCarsDetails();
 
             if (result.Success)
             {
