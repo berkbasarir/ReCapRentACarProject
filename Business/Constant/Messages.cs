@@ -1,6 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
+using Entities.Concrete;
 
 namespace Business.Constant
 {
@@ -8,12 +7,14 @@ namespace Business.Constant
     {
         public static string MaintenanceTime = "Sistem Bakımda.";
         public static string Listed = "Listelendi.";
+        public static string DefaultImage = "Default araba resmi";
 
         public static string CarAdded = "Araba Eklendi.";
         public static string CarDeleted = "Araba Silindi.";
         public static string CarUpdated = "Araba Güncellendi.";
         public static string CarListed = "Araba Listelendi.";
         public static string CarsListed = "Arabalar Listelendi.";
+        public static string CarNameAlreadyExist = "Bu isimde başka bir araba adı zaten var.";
         public static string CarAddError = "Araba adın 2 karakterden uzun ve günlük ücreti 0'dan büyük olmalıdır.";
 
         public static string ColorAdded = "Renk Eklendi.";
@@ -46,5 +47,13 @@ namespace Business.Constant
         public static string CustomerUpdated = "Müşteri Güncellendi.";
         public static string CustomersListed = "Müşteriler Listelendi.";
         public static string CustomerListed = "Müşteri Listelendi.";
+
+        public static string CarImageAdded = "Araç Resmi Eklendi.";
+        public static string CarImageDeleted = "Araç Resmi Silindi.";
+        public static string CarImageUpdated = "Araç Resmi Güncellendi.";
+        public static string CarImagesListed = "Araç Resimleri Listelendi.";
+        public static string CarImageListed = "Araç Resmi Listelendi.";
+        public static string CarImageLimitExceded = "Bir araca en fazla 5 resim yüklenebilir.";
+        
     }
 }
