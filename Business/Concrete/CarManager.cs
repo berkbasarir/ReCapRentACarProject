@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Business.Abstract;
-using Business.Constant;
+using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Business;

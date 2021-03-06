@@ -1,14 +1,13 @@
 ﻿using System.Collections.Generic;
 using Entities.Concrete;
 
-namespace Business.Constant
+namespace Business.Constants
 {
     public static class Messages
     {
         public static string MaintenanceTime = "Sistem Bakımda.";
         public static string Listed = "Listelendi.";
-        public static string DefaultImage = "Default araba resmi";
-
+        
         public static string CarAdded = "Araba Eklendi.";
         public static string CarDeleted = "Araba Silindi.";
         public static string CarUpdated = "Araba Güncellendi.";
@@ -53,7 +52,15 @@ namespace Business.Constant
         public static string CarImageUpdated = "Araç Resmi Güncellendi.";
         public static string CarImagesListed = "Araç Resimleri Listelendi.";
         public static string CarImageListed = "Araç Resmi Listelendi.";
-        public static string CarImageLimitExceded = "Bir araca en fazla 5 resim yüklenebilir.";
-        
+        public static string CarImageLimitExceeded = "Bir araca en fazla 5 resim yüklenebilir.";
+
+        public static string UserNotFound = "Kullanıcı bulunamadı";
+        public static string PasswordError = "Şifre hatalı";
+        public static string SuccessfulLogin = "Sisteme giriş başarılı";
+        public static string UserAlreadyExists = "Bu kullanıcı zaten mevcut";
+        public static string UserRegistered = "Kullanıcı başarıyla kaydedildi";
+        public static string AccessTokenCreated = "Access token başarıyla oluşturuldu";
+        public static string AuthorizationDenied = "Yetkiniz yok";
+
     }
 }

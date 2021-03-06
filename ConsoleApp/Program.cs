@@ -1,5 +1,6 @@
 ﻿using System;
 using Business.Concrete;
+using Core.Entities.Concrete;
 using DataAccess.Concrete.EntityFramework;
 using DataAccess.Concrete.InMemory;
 using Entities.Concrete;
@@ -35,11 +36,11 @@ namespace ConsoleApp
 
         private static void UserDetailUpdateAndGet(UserManager userManager)
         {
-            userManager.Update(new User { Id = 1, FirstName = "Berk", LastName = "Başarır", Email = "berk@basarir", Password = 1 });
+            userManager.Update(new User { Id = 1, FirstName = "Berk", LastName = "Başarır", Email = "berk@basarir",});
             
 
             var result = userManager.GetById(1).Data;
-            Console.WriteLine("Id: {0} FirstName: {1} LastName: {2} Email: {3} Password: {4}", result.Id, result.FirstName, result.LastName, result.Email, result.Password);
+            Console.WriteLine("Id: {0} FirstName: {1} LastName: {2} Email: {3}", result.Id, result.FirstName, result.LastName, result.Email);
         }
 
         private static void CustomerManagerUpdateTest(CustomerManager customerManager)
@@ -49,7 +50,7 @@ namespace ConsoleApp
 
         private static void UserManagerAddTest(UserManager userManager)
         {
-            userManager.Add(new User {Id = 4, FirstName = "Kemal", LastName = "Kağan", Email = "kemal@kagan.com", Password = 0});
+            userManager.Add(new User {Id = 4, FirstName = "Kemal", LastName = "Kağan", Email = "kemal@kagan.com"});
         }
 
         private static void CustomerManagerAddTest(CustomerManager customerManager)
@@ -116,7 +117,7 @@ namespace ConsoleApp
             {
                 foreach (var customer in result.Data)
                 {
-                    Console.WriteLine("{0} - {1} - {2} - {3} - {4}", customer.FirstName, customer.LastName, customer.CompanyName, customer.Email, customer.Password);
+                    Console.WriteLine("{0} - {1} - {2} - {3} - {4}", customer.FirstName, customer.LastName, customer.CompanyName, customer.Email);
                 }
 
                 Console.WriteLine(result.Message);

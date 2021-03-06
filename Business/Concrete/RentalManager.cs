@@ -3,7 +3,7 @@ using Business.Abstract;
 using Core.Utilities.Results;
 using Entities.Concrete;
 using System.Collections.Generic;
-using Business.Constant;
+using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
 using DataAccess.Abstract;
