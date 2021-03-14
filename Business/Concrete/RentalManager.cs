@@ -7,6 +7,7 @@ using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
 using DataAccess.Abstract;
+using Entities.DTOs;
 
 namespace Business.Concrete
 {
@@ -19,7 +20,7 @@ namespace Business.Concrete
             _rentalDal = rentalDal;
         }
 
-        [ValidationAspect(typeof(RentalValidator))]
+        //[ValidationAspect(typeof(RentalValidator))]
         public IResult Add(Rental rental)
         {
             if (rental.ReturnDate == null)
@@ -38,16 +39,17 @@ namespace Business.Concrete
 
         public IDataResult<List<Rental>> GetAll()
         {
-            if (DateTime.Now.Hour >= 16 && DateTime.Now.Hour < 18)
-            {
-                return new ErrorDataResult<List<Rental>>(Messages.MaintenanceTime);
-            }
-            return new SuccessDataResult<List<Rental>>(_rentalDal.GetAll(), Messages.RentalsListed);
+           return new SuccessDataResult<List<Rental>>(_rentalDal.GetAll(), Messages.RentalsListed);
         }
 
-        public IDataResult<Rental> GetById(int colorId)
+        public IDataResult<Rental> GetById(int rentalId)
         {
-            return new SuccessDataResult<Rental>(_rentalDal.Get(c => c.Id == colorId), Messages.RentalListed);
+            return new SuccessDataResult<Rental>(_rentalDal.Get(c => c.Id == rentalId), Messages.RentalListed);
+        }
+
+        public IDataResult<List<RentalDetailDto>> GetRentalsDetails()
+        {
+            return new SuccessDataResult<List<RentalDetailDto>>(_rentalDal.GetRentalsDetails(), Messages.Listed);
         }
 
         public IResult Update(Rental rental)

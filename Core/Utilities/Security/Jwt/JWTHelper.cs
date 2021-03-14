@@ -1,28 +1,30 @@
-﻿using Core.Entities.Concrete;
-using Core.Extensions;
-using Core.Utilities.Security.Encryption;
-using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Tokens;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
+using System.Text;
+using Core.Entities.Concrete;
+using Core.Extensions;
+using Core.Utilities.Security.Encryption;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
+
+//using Microsoft.IdentityModel.Tokens;
 
 namespace Core.Utilities.Security.Jwt
 {
-    public class JWTHelper : ITokenHelper
+    public class JwtHelper : ITokenHelper
     {
         public IConfiguration Configuration { get; }
         private TokenOptions _tokenOptions;
         private DateTime _accessTokenExpiration;
-
-        public JWTHelper(IConfiguration configuration)
+        public JwtHelper(IConfiguration configuration)
         {
             Configuration = configuration;
             _tokenOptions = Configuration.GetSection("TokenOptions").Get<TokenOptions>();
-        }
 
+        }
         public AccessToken CreateToken(User user, List<OperationClaim> operationClaims)
         {
             _accessTokenExpiration = DateTime.Now.AddMinutes(_tokenOptions.AccessTokenExpiration);
@@ -64,7 +66,5 @@ namespace Core.Utilities.Security.Jwt
 
             return claims;
         }
-
-
     }
 }

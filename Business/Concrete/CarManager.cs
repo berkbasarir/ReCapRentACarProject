@@ -1,15 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Business.Abstract;
+﻿using Business.Abstract;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Caching;
+using Core.Aspects.Autofac.Logging;
+using Core.Aspects.Autofac.Performance;
+using Core.Aspects.Autofac.Transaction;
 using Core.Aspects.Autofac.Validation;
+using Core.CrossCuttingConcerns.Logging.Log4Net.Loggers;
 using Core.Utilities.Business;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
+using Business.BusinessAspects.Autofac;
 using Entities.DTOs;
+using System;
 
 namespace Business.Concrete
 {
@@ -25,7 +32,9 @@ namespace Business.Concrete
             _carImageService = carImageService;
         }
 
-        [ValidationAspect(typeof(CarValidator))]
+
+        [CacheRemoveAspect("ICarService.Get")]
+        [ValidationAspect(typeof(CarValidator), Priority = 1)]
         public IResult Add(Car car)
         {
             IResult result = BusinessRules.Run(CheckIfProductNameExist(car.Name));
@@ -44,6 +53,10 @@ namespace Business.Concrete
             return new SuccessResult(Messages.BrandDeleted);
         }
 
+        [PerformanceAspect(5)]
+        //[SecuredOperation("car.list, Admin")]
+        [LogAspect(typeof(FileLogger))]
+        [CacheAspect(duration: 10)]
         public IDataResult<List<Car>> GetAll()
         {
             if (DateTime.Now.Hour >= 15 && DateTime.Now.Hour < 16)
@@ -94,7 +107,6 @@ namespace Business.Concrete
             return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetAllCarsDetails(), Messages.Listed);
         }
 
-
         private IResult CheckIfProductNameExist(string carName)
         {
             //Aynı isimde ürün var mı
@@ -104,6 +116,14 @@ namespace Business.Concrete
                 return new ErrorResult(Messages.CarNameAlreadyExist);
             }
             return new SuccessResult();
+        }
+
+        [TransactionScopeAspect]
+        public IResult TransactionalOperation(Car car)
+        {
+            _carDal.Update(car);
+            _carDal.Add(car);
+            return new SuccessResult(Messages.CarUpdated);
         }
     }
 }

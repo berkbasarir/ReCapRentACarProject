@@ -49,13 +49,9 @@ namespace Business.Concrete
             return new SuccessResult(Messages.CustomerUpdated);
         }
 
-        public IDataResult<List<CustomerDetailDto>> GetCustomerDetails()
+        public IDataResult<List<CustomersDetailDto>> GetCustomersDetails()
         {
-            if (DateTime.Now.Hour >= 16 && DateTime.Now.Hour < 18)
-            {
-                return new ErrorDataResult<List<CustomerDetailDto>>(Messages.MaintenanceTime);
-            }
-            return new SuccessDataResult<List<CustomerDetailDto>>(_customerDal.GetCustomerDetails(), Messages.Listed);
+          return new SuccessDataResult<List<CustomersDetailDto>>(_customerDal.GetCustomersDetails(), Messages.CustomersListed);
         }
     }
 }
