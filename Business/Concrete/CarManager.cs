@@ -17,6 +17,7 @@ using System.Threading;
 using Business.BusinessAspects.Autofac;
 using Entities.DTOs;
 using System;
+using System.Linq.Expressions;
 
 namespace Business.Concrete
 {
@@ -59,10 +60,10 @@ namespace Business.Concrete
         [CacheAspect(duration: 10)]
         public IDataResult<List<Car>> GetAll()
         {
-            if (DateTime.Now.Hour >= 15 && DateTime.Now.Hour < 16)
-            {
-                return new ErrorDataResult<List<Car>>(Messages.MaintenanceTime);
-            }
+            //if (DateTime.Now.Hour >= 15 && DateTime.Now.Hour < 16)
+            //{
+            //    return new ErrorDataResult<List<Car>>(Messages.MaintenanceTime);
+            //}
             
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(), Messages.CarsListed);
         }
@@ -82,15 +83,6 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.DailyPrice >= min && c.DailyPrice <= max), Messages.Listed);
         }
 
-        public IDataResult<List<Car>> GetCarsByBrandId(int brandId)
-        {
-            return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.BrandId == brandId), Messages.Listed);
-        }
-
-        public IDataResult<List<Car>> GetCarsByColorId(int colorId)
-        {
-            return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.ColorId == colorId), Messages.Listed);
-        }
 
         public IResult Update(Car car)
         {
@@ -100,12 +92,31 @@ namespace Business.Concrete
 
         public IDataResult<List<CarDetailDto>> GetAllCarsDetails()
         {
-            if (DateTime.Now.Hour >= 16 && DateTime.Now.Hour < 18)
-            {
-                return new ErrorDataResult<List<CarDetailDto>>(Messages.MaintenanceTime);
-            }
+            //if (DateTime.Now.Hour >= 16 && DateTime.Now.Hour < 18)
+            //{
+            //    return new ErrorDataResult<List<CarDetailDto>>(Messages.MaintenanceTime);
+            //}
             return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetAllCarsDetails(), Messages.Listed);
         }
+
+        public IDataResult<List<CarDetailDto>> GetCarDetailDtos(Expression<Func<Car, bool>> filter = null)
+        {
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetailDtos(filter), "Ürünler Listelendi.");
+        }
+
+        public IDataResult<List<Car>> GetCarsByBrandId(int BrandId)
+        {
+            return new SuccessDataResult<List<Car>>(_carDal.GetAll().Where(c => c.BrandId == BrandId).ToList());
+        }
+
+        public IDataResult<List<Car>> GetCarsByColorId(int ColorId)
+        {
+            return new SuccessDataResult<List<Car>>(_carDal.GetAll().Where(c => c.ColorId == ColorId).ToList());
+        }
+
+
+
+
 
         private IResult CheckIfProductNameExist(string carName)
         {

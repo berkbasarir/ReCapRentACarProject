@@ -2,11 +2,15 @@
 using Microsoft.AspNetCore.Http;
 using System;
 using System.IO;
+using System.Text.RegularExpressions;
 
 namespace Core.Utilities.Helpers
 {
     public class FileHelper
     {
+        static string uploadPath = Environment.CurrentDirectory + @"\wwwroot\uploads\";
+
+
         public static string Add(IFormFile file)
         {
             var sourcepath = Path.GetTempFileName();
@@ -18,7 +22,7 @@ namespace Core.Utilities.Helpers
                 }
             }
             var result = newPath(file);
-            File.Move(sourcepath, result);
+            File.Move(sourcepath, uploadPath + result);
             return result;
         }
         public static IResult Delete(string path)
@@ -50,12 +54,13 @@ namespace Core.Utilities.Helpers
         public static string newPath(IFormFile file)
         {
             FileInfo ff = new FileInfo(file.FileName);
-            string fileExtension = ff.Extension;
+            string fileExtension = ff.Extension;            
+            
+            var newPath = DateTime.Now.ToString("HH/mm/ss MM/dd/yyyy ") + Guid.NewGuid().ToString() + fileExtension;
 
-            string path = Environment.CurrentDirectory + @"\wwwroot\uploads";
-            var newPath = Guid.NewGuid().ToString() + fileExtension;
+            string result = Regex.Replace(newPath, "[/|:| ]", "-");
 
-            string result = $@"{path}\{newPath}";
+            //string result = $@"{path}\{newPath}";
             return result;
         }
 
