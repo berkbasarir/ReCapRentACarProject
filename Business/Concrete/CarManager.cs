@@ -33,7 +33,7 @@ namespace Business.Concrete
             _carImageService = carImageService;
         }
 
-
+        [SecuredOperation("car.add, admin")]
         [CacheRemoveAspect("ICarService.Get")]
         [ValidationAspect(typeof(CarValidator), Priority = 1)]
         public IResult Add(Car car)
