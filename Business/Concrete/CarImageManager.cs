@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace Business.Concrete
 {
@@ -75,17 +76,26 @@ namespace Business.Concrete
         }
 
         [ValidationAspect(typeof(CarImageValidator))]
-        public IDataResult<List<CarImage>> GetImagesByCarId(int id)
+        public IDataResult<List<CarImage>> GetImagesByCarId(int carId)
         {
-            IResult result = BusinessRules.Run(CheckIfCarImageNull(id));
+            IResult result = BusinessRules.Run(CheckIfCarImageNull(carId));
 
             if (result != null)
             {
                 return new ErrorDataResult<List<CarImage>>(result.Message);
             }
 
-            return new SuccessDataResult<List<CarImage>>(CheckIfCarImageNull(id).Data);
+            return new SuccessDataResult<List<CarImage>>(CheckIfCarImageNull(carId).Data);
         }
+
+
+
+        //public IDataResult<List<CarImage>> GetImagesByCarId(int carId)
+        //{
+        //    return new SuccessDataResult<List<CarImage>>(CheckIfCarImageNull(carId), "Arabaya göre resimler gösterildi.");
+        //}
+
+
 
         //business rules
         private IResult CheckImageLimitExceeded(int carid)
@@ -98,16 +108,16 @@ namespace Business.Concrete
 
             return new SuccessResult();
         }
-        private IDataResult<List<CarImage>> CheckIfCarImageNull(int id)
+        private IDataResult<List<CarImage>> CheckIfCarImageNull(int carId)
         {
             try
             {
-                string path = @"\wwwroot\uploads\logo.jpg";
-                var result = _carImageDAL.GetAll(c => c.CarId == id).Any();
+                string path = @"default.jpg";
+                var result = _carImageDAL.GetAll(c => c.CarId == carId).Any();
                 if (!result)
                 {
                     List<CarImage> carimage = new List<CarImage>();
-                    carimage.Add(new CarImage { CarId = id, ImagePath = path, Date = DateTime.Now });
+                    carimage.Add(new CarImage { CarId = carId, ImagePath = path, Date = DateTime.Now });
                     return new SuccessDataResult<List<CarImage>>(carimage);
                 }
             }
@@ -117,8 +127,29 @@ namespace Business.Concrete
                 return new ErrorDataResult<List<CarImage>>(exception.Message);
             }
 
-            return new SuccessDataResult<List<CarImage>>(_carImageDAL.GetAll(p => p.CarId == id).ToList());
+            return new SuccessDataResult<List<CarImage>>(_carImageDAL.GetAll(c => c.CarId == carId).ToList());
         }
+
+
+
+        //private List<CarImage> CheckIfCarImageNull(int carId)
+        //{
+        //    var result = _carImageDAL.GetAll(i => i.CarId == carId).Any();
+        //    if (!result)
+        //    {
+        //        string path = @"default.jpg";
+        //        return new List<CarImage>
+        //        {
+        //            new CarImage
+        //            {
+        //                CarId = carId,
+        //                Date= DateTime.Now,
+        //                ImagePath = path
+        //            }
+        //        };
+        //    }
+        //    return _carImageDAL.GetAll(i => i.CarId == carId);
+        //}
 
 
 
