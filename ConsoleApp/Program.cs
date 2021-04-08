@@ -43,7 +43,7 @@ namespace ConsoleApp
 
         private static void UserManagerAddTest(UserManager userManager)
         {
-            userManager.Add(new User {Id = 4, FirstName = "Kemal", LastName = "Kağan", Email = "kemal@kagan.com"});
+            //userManager.Add(new User {Id = 4, FirstName = "Kemal", LastName = "Kağan", Email = "kemal@kagan.com"});
         }
 
         private static void CustomerManagerAddTest(CustomerManager customerManager)

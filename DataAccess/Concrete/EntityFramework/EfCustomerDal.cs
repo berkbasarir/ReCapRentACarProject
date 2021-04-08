@@ -21,9 +21,37 @@ namespace DataAccess.Concrete.EntityFramework
                     join u in context.Users on c.UserId equals u.Id
                     select new CustomersDetailDto()
                     {
-                        CustomerId = c.Id, FirstName = u.FirstName, LastName = u.LastName, CompanyName = c.CompanyName, Email = u.Email
+                        id = c.Id,
+                        UserId = c.UserId,
+                        FirstName = u.FirstName, 
+                        LastName = u.LastName, 
+                        CompanyName = c.CompanyName, 
+                        Email = u.Email,
+                        FindexPoint = (int)c.FindexPoint
                     };
                 return result.ToList();
+            }
+        }
+
+        public CustomersDetailDto GetByEmail(Expression<Func<CustomersDetailDto, bool>> filter)
+        {
+            using (var context = new RentACarProjectDbContext())
+            {
+                var result = from customer in context.Customers
+                             join user in context.Users
+                             on customer.UserId equals user.Id
+                             select new CustomersDetailDto
+                             {
+                                 id = customer.Id,
+                                 UserId = customer.UserId,
+                                 FirstName = user.FirstName,
+                                 LastName = user.LastName,
+                                 Email = user.Email,
+                                 CompanyName = customer.CompanyName,
+                                 FindexPoint = (int)customer.FindexPoint
+                             };
+
+                return result.SingleOrDefault(filter);
             }
         }
     }
