@@ -5,13 +5,15 @@ using System.Text;
 
 namespace Entities.DTOs
 {
-    public class RentalDetailDto : IEntity
+    public class RentalDetailDto : IDto
     {
-        public int RentalId { get; set; }
-        public string BrandName { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
+        public int Id { get; set; }
+        public string CarBrand { get; set; }
+        public string CarModel { get; set; }
+        public string CustomerFirstName { get; set; }
+        public string CustomerLastName { get; set; }
+        public string CompanyName { get; set; }
         public DateTime RentDate { get; set; }
-        public DateTime ReturnDate { get; set; }
+        public DateTime? ReturnDate { get; set; }
     }
 }

@@ -54,6 +54,11 @@ namespace Business.Constants
         public static string CarImageListed = "Araç Resmi Listelendi.";
         public static string CarImageLimitExceeded = "Bir araca en fazla 5 resim yüklenebilir.";
 
+        public static string CardAdded = "Kart bilgileri kaydedildi";
+        public static string CardDeleted = "Kart bilgileri silindi";
+        public static string CardUpdated = "Kart bilgileri güncellendi";
+        public static string CardAlreadyExists = "Kart daha önceden kaydedilmiş";
+
         public static string UserNotFound = "Kullanıcı bulunamadı";
         public static string PasswordError = "Şifre hatalı";
         public static string SuccessfulLogin = "Sisteme giriş başarılı";
