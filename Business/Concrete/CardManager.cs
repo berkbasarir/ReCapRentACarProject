@@ -36,8 +36,7 @@ namespace Business.Concrete
 
         public IDataResult<List<Card>> GetAll()
         {
-            var getAll = _cardDal.GetAll();
-            return new SuccessDataResult<List<Card>>(getAll);
+            return new SuccessDataResult<List<Card>>(_cardDal.GetAll(), Messages.CardsListed);
         }
 
         public IDataResult<List<Card>> GetByCustomerId(int customerId)

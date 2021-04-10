@@ -20,7 +20,7 @@ namespace WebAPI.Controllers
             _cardService = cardService;
         }
 
-        [HttpGet]
+        [HttpGet("getall")]
         public IActionResult GetAll()
         {
             var result = _cardService.GetAll();
@@ -42,7 +42,7 @@ namespace WebAPI.Controllers
             return Ok(result);
         }
 
-        [HttpPost]
+        [HttpPost("add")]
         public IActionResult Add(Card card)
         {
             var result = _cardService.Add(card);
@@ -53,7 +53,7 @@ namespace WebAPI.Controllers
             return Ok(result);
         }
 
-        [HttpPost]
+        [HttpPost("update")]
         public IActionResult Update(Card card)
         {
             var result = _cardService.Update(card);
@@ -64,7 +64,7 @@ namespace WebAPI.Controllers
             return Ok(result);
         }
 
-        [HttpDelete]
+        [HttpPost("delete")]
         public IActionResult Delete(Card card)
         {
             var result = _cardService.Delete(card);

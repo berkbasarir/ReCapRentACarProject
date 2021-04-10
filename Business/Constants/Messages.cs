@@ -56,7 +56,8 @@ namespace Business.Constants
 
         public static string CardAdded = "Kart bilgileri kaydedildi";
         public static string CardDeleted = "Kart bilgileri silindi";
-        public static string CardUpdated = "Kart bilgileri güncellendi";
+        public static string CardUpdated = "Kart bilgileri güncellendi"; 
+        public static string CardsListed = "Kartlar listelendi."; 
         public static string CardAlreadyExists = "Kart daha önceden kaydedilmiş";
 
         public static string UserNotFound = "Kullanıcı bulunamadı";

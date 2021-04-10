@@ -26,7 +26,7 @@ namespace DataAccess.Concrete.EntityFramework
                     {
                         Id = rental.Id,
                         CarBrand = brand.Name,
-                        CarModel = car.Description,
+                        CarModel = car.ModelYear,
                         CustomerFirstName = user.FirstName,
                         CustomerLastName = user.LastName,
                         CompanyName = customer.CompanyName,
