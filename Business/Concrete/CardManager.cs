@@ -11,7 +11,7 @@ namespace Business.Concrete
 {
     public class CardManager : ICardService
     {
-        private readonly ICardDal _cardDal;
+        private ICardDal _cardDal;
 
         public CardManager(ICardDal cardDal)
         {
@@ -39,7 +39,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Card>>(_cardDal.GetAll(), Messages.CardsListed);
         }
 
-        public IDataResult<List<Card>> GetByCustomerId(int customerId)
+        public IDataResult<List<Card>> GetCardsByCustomerId(int customerId)
         {
             var getByCustomerId = _cardDal.GetAll(card => card.CustomerId == customerId);
             return new SuccessDataResult<List<Card>>(getByCustomerId);
